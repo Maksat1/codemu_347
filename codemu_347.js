@@ -23,37 +23,12 @@ add_item.addEventListener('blur', function() {
     new_tag.textContent = this.value;
     new_tag.addEventListener('click', edit_item)
     list.appendChild(item);
-
-    let link = document.createElement('a');
-    link.href = '';
-    link.textContent = ' delete';
-    item.append(link);
-
-    new_tag.addEventListener('click', edit_item);
-
-    link.addEventListener('click', function(e) {
-        item.remove();
-        e.preventDefault();
-    })
-    let decor = document.createElement('a');
-    decor.href = '';
-    decor.textContent = 'cross';
-    item.appendChild(decor);
-
-    decor.addEventListener('click', function(e) {
-        new_tag.classList.add('cross');
-        e.preventDefault();
-    })
+    creator(document, item, new_tag)
 })
 //создание ссылок на удаление и зачеркивание
 let items = document.querySelectorAll('li');
 
-for (let item of items) {
-    let new_tag = document.createElement('span');
-    new_tag.textContent = item.textContent;
-    item.textContent = '';
-    item.appendChild(new_tag);
-
+const creator = (document,item,new_tag)=>{
     let link = document.createElement('a');
     link.href = '';
     link.textContent = ' delete';
@@ -74,6 +49,15 @@ for (let item of items) {
         new_tag.classList.add('cross');
         e.preventDefault();
     })
+}
+
+for (let item of items) {
+    let new_tag = document.createElement('span');
+    new_tag.textContent = item.textContent;
+    item.textContent = '';
+    item.appendChild(new_tag);
+    creator(document, item, new_tag)
+   
 }
 
 function edit_item(event) {
